@@ -1,0 +1,43 @@
+{
+  "_readme": "这是推荐配置片段，不是可直接覆盖的完整配置文件。请把这些键的值合并进 <ASTRBOT>/data/config/meme_manager_config.json，保留你原有的 packs / selection_rules / storage / auto_collect / prompt.head / prompt.tail 等内容。改完必须重载插件，这些值只在插件 __init__ 里读取一次。",
+  "version": "5.2.11-localfix.1",
+  "semantic": {
+    "enabled": true,
+    "tool_probability_enabled": true,
+    "tool_call_probability": 100,
+    "top_k": 5,
+    "min_score": 0.2
+  },
+  "generation": {
+    "trigger": {
+      "scope": "chat_and_plugin_llm"
+    },
+    "emotion": {
+      "llm": {
+        "enabled": false
+      },
+      "max_memes_per_message": -1,
+      "probability": 100
+    },
+    "prompt": {
+      "quantity_guidance_enabled": true,
+      "category_example_enabled": true,
+      "reply_example_enabled": true,
+      "quantity_guidance": "\n[表情数量偏好]\n通常配 1 张，一般不超过 2 张。\n参考节奏为每约 2 条助手回复中有 1 条配图；近期连续两条回复都没有配图时，这一条优先配 1 张。\n只在回答纯事实、纯代码，或用户明确要求纯文字格式时不配图。\n"
+    },
+    "matching": {
+      "enable_loose_matching": true
+    },
+    "message": {
+      "enable_mixed": true,
+      "mixed_probability": 50,
+      "streaming_compatibility": true
+    },
+    "markup": {
+      "filter_all_tags": false,
+      "enable_alternative": true,
+      "remove_invalid_alternative": false,
+      "enable_repeated_detection": true
+    }
+  }
+}

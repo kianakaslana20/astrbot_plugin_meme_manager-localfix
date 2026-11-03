@@ -1,0 +1,18 @@
+--- a/mixins/event_handlers.py
++++ b/mixins/event_handlers.py
+@@ -1328,13 +1328,11 @@
+                             "[meme_manager] Probability tool search has no selection: %s",
+                             result.get("reason", "no_candidates"),
+                         )
+             self._remove_semantic_tool(req)
+-            req.system_prompt = self._strip_meme_prompt(
+-                req.system_prompt
+-            ) + self._semantic_system_prompt(
++            req.system_prompt = self._semantic_system_prompt(
+                 event.get_extra("meme_manager_tool_probability_result")
+-            )
++            ) + self._strip_meme_prompt(req.system_prompt)
+ 
+     async def _resolve_emotion_llm_provider_id(self, event: AstrMessageEvent) -> str:
+         """返回情感辅助模型；配置留空时复用本轮真实回复 Provider。"""
+         configured_id = str(self.emotion_llm_provider_id or "").strip()
