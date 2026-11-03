@@ -4,6 +4,8 @@
 >
 > 基线：`anka/astrbot_plugin_meme_manager` **v5.2.11**（MIT）
 > 本版标识：**5.2.11-localfix.1**
+>
+> 一键下载：[astrbot_plugin_meme_manager-5.2.11-localfix.1.zip](https://github.com/kianakaslana20/astrbot_plugin_meme_manager-localfix/releases/download/v5.2.11-localfix.1/astrbot_plugin_meme_manager-5.2.11-localfix.1.zip)（含完整源码 + patch + 文档 + LICENSE）
 
 ## 这是什么
 
@@ -104,9 +106,13 @@ cp -r meme_manager/* <ASTRBOT>/data/plugins/meme_manager/
 
 ```bash
 cd <ASTRBOT>/data/plugins/meme_manager
-git apply --verbose /path/to/patches/0001-main-py.patch
-git apply --verbose /path/to/patches/0002-event-handlers-py.patch
+
+# 建议先关掉行尾转换，避免 apply 后被改成 CRLF（内容不变，只影响 md5 比对）
+git -c core.autocrlf=false apply --verbose /path/to/patches/0001-main-py.patch
+git -c core.autocrlf=false apply --verbose /path/to/patches/0002-event-handlers-py.patch
 ```
+
+两份 patch 已在干净的上游 v5.2.11 上验证可 `git apply` 通过，应用后与 `meme_manager/` 目录内容逐行一致。
 
 改完**必须重载插件**——`main.py` 里 `semantic_enabled`、`tool_probability_enabled`、`emotions_probability`、`quantity_guidance` 等全部只在 `__init__` 读取一次：
 
